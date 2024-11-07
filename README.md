@@ -35,5 +35,18 @@ autocmd FileType c,cpp setlocal omnifunc=syntaxcomplete#Complete
 
 " Trigger omnifunc completion manually with <C-x><C-o>
 inoremap <silent><expr> <C-Space> "<C-x><C-o>"
+
+" Toggle line comments in Normal mode
+nnoremap <leader>c :s/^/\/\//<CR>
+
+" Toggle line comments in Visual mode
+vnoremap <leader>c :s/^/\/\//<CR>gv
+
+" Uncomment lines in Normal mode
+nnoremap <leader>u :s/^\/\/<CR>
+
+" Uncomment lines in Visual mode
+vnoremap <leader>u :s/^\/\/<CR>gv
+
 ```
 
