@@ -48,5 +48,7 @@ nnoremap <leader>u :s/^\/\/<CR>
 " Uncomment lines in Visual mode
 vnoremap <leader>u :s/^\/\/<CR>gv
 
+" Store yanking and pasting in system register
+set clipboard+=unnamed
 ```
 
