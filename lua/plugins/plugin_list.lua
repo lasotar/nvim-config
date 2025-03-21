@@ -34,5 +34,14 @@ return
     config = function()
       require("plugins.neo-tree")
     end,
-  }
+  },
+  -- Bufferline
+  {
+      "akinsho/bufferline.nvim",
+      version = "v3.*", -- Use the latest stable version
+      dependencies = { "nvim-tree/nvim-web-devicons" }, -- Optional dependency for icons
+      config = function()
+          require("plugins.bufferline")
+      end,
+  },
 }
