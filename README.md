@@ -16,10 +16,9 @@ Other plugins are placed in lua/plugins
 
 ### Other plugins
 - Autocomplete: nvim-cmp (https://github.com/hrsh7th/nvim-cmp)
-- Comments: comment.nvim (https://github.com/numToStr/Comment.nvim)
-- Autopairs (https://github.com/windwp/nvim-autopairs)
 - Neo-tree (https://github.com/nvim-neo-tree/neo-tree.nvim)
 - Telescope (https://github.com/nvim-telescope/telescope.nvim)
+- Mini.nvim (https://github.com/echasnovski/mini.nvim)
 
 ## Commands
 The config has some custom commands, all placed in lua/commands
@@ -40,8 +39,6 @@ Make sure nvim is installed. Then
 
 ## Future
 Current TODO list:
-- Make comment.nvim keymaps editable            Priority: Low
-- Add and configure mini.nvim                   Priority: Medium
 - Add C debugger                                Priority: Medium
 - Make it suitable for C++                      Priority: Medium
 - Make the config work for Angular webdev       Priority: Low

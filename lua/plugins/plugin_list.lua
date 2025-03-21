@@ -1,27 +1,5 @@
 return
 {
-    -- Auto-closing pairs
-    {
-      "windwp/nvim-autopairs",
-      event = "InsertEnter",
-      config = function()
-          require("plugins.autopairs")
-      end,
-    },
-
-    -- Commenting
-    {
-      "numToStr/Comment.nvim",
-      event = "VeryLazy", -- Load the plugin lazily
-      config = function()
-        require("Comment").setup({
-          mappings = {
-            basic = false,
-            extra = false,
-          },
-        })
-      end,
-    },
     -- Neo-tree
     {
       "nvim-neo-tree/neo-tree.nvim",
@@ -63,5 +41,15 @@ return
         event = "BufReadPre",
         opts = { -- set to setup table
        },
-    }
+    },
+   {
+      "echasnovski/mini.nvim",
+      config = function()
+        require('mini.ai').setup({})
+        require('mini.comment').setup({})
+        require('mini.surround').setup({})
+        require('mini.pairs').setup({})
+        -- Add more mini.nvim modules as needed
+      end,
+    },
 }
