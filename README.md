@@ -34,6 +34,9 @@ Make sure nvim is installed. Then
 If you want to add your own plugins, edit the lua/plugins/plugin_list.lua file.
 If you want to add your own commands, add the file with the command to lua/commands and register it in the lua/commads/command_register.lua file
 
+## Prerequisites
+- A nerd font (for example JetBrains nerd font)
+
 ## Future
 Current TODO list:
 - Add and configure telescope  Priority: High
