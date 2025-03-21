@@ -18,7 +18,6 @@ Other plugins are placed in lua/plugins
 - Autocomplete: nvim-cmp (https://github.com/hrsh7th/nvim-cmp)
 - Comments: comment.nvim (https://github.com/numToStr/Comment.nvim)
 - Autopairs (https://github.com/windwp/nvim-autopairs)
-- Bufferlie (https://github.com/akinsho/bufferline.nvim)
 - Neo-tree (https://github.com/nvim-neo-tree/neo-tree.nvim)
 - Telescope (https://github.com/nvim-telescope/telescope.nvim)
 
@@ -41,13 +40,12 @@ Make sure nvim is installed. Then
 
 ## Future
 Current TODO list:
-- Make comment.nvim keymaps editable        Priority: Low
-- Add and configure mini.nvim               Priority: Medium
-- Add a colorizer                           Priority: Medium
-- Add C debugger                            Priority: Medium
-- Make it suitable for C++                  Priority: Medium
-- Make the config work for Angular webdev   Priority: Low
+- Make comment.nvim keymaps editable            Priority: Low
+- Add and configure mini.nvim                   Priority: Medium
+- Add C debugger                                Priority: Medium
+- Make it suitable for C++                      Priority: Medium
+- Make the config work for Angular webdev       Priority: Low
 
 ## FAQ
 How to change the theme?
-- You can edit the theme in lua/core/visual.lua. Just replace the existing one.
+- You can edit the theme in lua/core/visual.lua. Just replace the existing one. Then, change the other hexcodes in visual.lua

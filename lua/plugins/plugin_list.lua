@@ -35,15 +35,6 @@ return
         require("plugins.neo-tree")
       end,
     },
-    -- Bufferline
-    {
-        "akinsho/bufferline.nvim",
-        version = "v3.*", -- Use the latest stable version
-        dependencies = { "nvim-tree/nvim-web-devicons" }, -- Optional dependency for icons
-        config = function()
-          require("plugins.bufferline")
-        end,
-    },
     {
         "nvim-telescope/telescope.nvim",
         dependencies = {
@@ -64,6 +55,13 @@ return
             },
           })
 
-        end,
-      },
+      end,
+    },
+    -- Colorizer
+    {
+        "catgoose/nvim-colorizer.lua",
+        event = "BufReadPre",
+        opts = { -- set to setup table
+       },
+    }
 }

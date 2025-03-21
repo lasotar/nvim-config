@@ -29,30 +29,52 @@ return {
     "nvim-lualine/lualine.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" }, -- Optional: for icons
     config = function()
-      require("lualine").setup({
-        options = {
-          theme = "carbonfox", -- Match your theme (or use "auto" for automatic theme detection)
-          icons_enabled = true, -- Enable icons (requires a patched font or nvim-web-devicons)
-          component_separators = { left = "", right = "" }, -- Separators between components
-          section_separators = { left = "", right = "" }, -- Separators between sections
+require("lualine").setup({
+  options = {
+    theme = "carbonfox", -- Match your theme (or use "auto" for automatic theme detection)
+    icons_enabled = true, -- Enable icons (requires a patched font or nvim-web-devicons)
+    component_separators = { left = "", right = "" }, -- Separators between components
+    section_separators = { left = "", right = "" }, -- Separators between sections
+  },
+  sections = {
+    lualine_a = { "mode" }, -- Left section (mode)
+    lualine_b = { "branch", "diff", "diagnostics" }, -- Left-middle section (git branch, diff, diagnostics)
+    lualine_c = { "filename" }, -- Middle section (file name)
+    lualine_x = { "filetype" }, -- Right-middle section (file type)
+    lualine_y = { "progress" }, -- Right section (line and column number)
+    lualine_z = { "location" }, -- Far-right section (cursor location)
+  },
+  inactive_sections = {
+    lualine_a = {}, -- Inactive left section
+    lualine_b = {}, -- Inactive left-middle section
+    lualine_c = { "filename" }, -- Inactive middle section (file name)
+    lualine_x = { "location" }, -- Inactive right section (cursor location)
+    lualine_y = {}, -- Inactive right-middle section
+    lualine_z = {}, -- Inactive far-right section
+  },
+  tabline = {
+    lualine_a = {
+      {
+        "buffers",
+        show_filename_only = true, -- Show only the filename, not the full path
+        show_modified_status = true, -- Show a + if the buffer is modified
+        mode = 2, -- 0: Shows buffer name, 1: Shows buffer index, 2: Shows buffer name + buffer index
+        max_length = vim.o.columns * 2 / 3, -- Maximum width of the buffers component
+        filetype_names = {
+          TelescopePrompt = "Telescope",
+          dashboard = "Dashboard",
+          packer = "Packer",
+          fzf = "FZF",
+          alpha = "Alpha",
+        }, -- Customize the display name for specific filetypes
+        buffers_color = {
+          active = { fg = "#ffffff", bg = "#1a1a1a" }, -- Custom colors for active buffer
+          inactive = { fg = "#d8dee9", bg = "#0a0a0a" }, -- Custom colors for inactive buffers
         },
-        sections = {
-          lualine_a = { "mode" }, -- Left section (mode)
-          lualine_b = { "branch", "diff", "diagnostics" }, -- Left-middle section (git branch, diff, diagnostics)
-          lualine_c = { "filename" }, -- Middle section (file name)
-          lualine_x = { "filetype" }, -- Right-middle section (file type)
-          lualine_y = { "progress" }, -- Right section (line and column number)
-          lualine_z = { "location" }, -- Far-right section (cursor location)
-        },
-        inactive_sections = {
-          lualine_a = {}, -- Inactive left section
-          lualine_b = {}, -- Inactive left-middle section
-          lualine_c = { "filename" }, -- Inactive middle section (file name)
-          lualine_x = { "location" }, -- Inactive right section (cursor location)
-          lualine_y = {}, -- Inactive right-middle section
-          lualine_z = {}, -- Inactive far-right section
-        },
-      })
+      },
+    },
+  },
+})
     end,
   },
 }

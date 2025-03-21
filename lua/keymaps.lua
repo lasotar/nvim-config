@@ -26,7 +26,7 @@ local function set_keymaps()
   -- no need for anything else rly
 
   -- Bufferline
-  vim.keymap.set("n", "<leader><Tab>", ":BufferLineCycleNext<CR>", { desc = "Next buffer", silent = true })
+  vim.keymap.set("n", "<leader><Tab>", ":bnext<CR>", { desc = "Next buffer", silent = true })
   vim.keymap.set("n", "<leader>d<Tab>", ":bd<CR>", { desc = "Close current buffer", silent = true })
 
   -- Neo-tree
