@@ -25,12 +25,19 @@ local function set_keymaps()
   -- gc (normal): toggle linewise
   -- no need for anything else rly
 
-  -- TODO: add bufferline keymaps
+  -- Bufferline
+  vim.keymap.set("n", "<leader><Tab>", ":BufferLineCycleNext<CR>", { desc = "Next buffer", silent = true })
+  vim.keymap.set("n", "<leader>d<Tab>", ":bd<CR>", { desc = "Close current buffer", silent = true })
 
   -- Neo-tree
   vim.keymap.set("n", "<leader>e", "<Cmd>Neotree toggle<CR>", { desc = "Toggle NeoTree" })
-  -- Focus on neo-tree
-  vim.keymap.set("n", "<leader>E", "<Cmd>Neotree focus<CR>", { desc = "Focus NeoTree" })
+
+  -- Keybindings for Telescope
+  local telescope = require("telescope.builtin")
+  vim.keymap.set("n", "<leader>ff", telescope.find_files, { desc = "Find files" })
+  vim.keymap.set("n", "<leader>fg", telescope.live_grep, { desc = "Live grep" })
+  vim.keymap.set("n", "<leader>fb", telescope.buffers, { desc = "Find buffers" })
+  vim.keymap.set("n", "<leader>fh", telescope.help_tags, { desc = "Help tags" })
 end
 
 return set_keymaps

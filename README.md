@@ -20,29 +20,33 @@ Other plugins are placed in lua/plugins
 - Autopairs (https://github.com/windwp/nvim-autopairs)
 - Bufferlie (https://github.com/akinsho/bufferline.nvim)
 - Neo-tree (https://github.com/nvim-neo-tree/neo-tree.nvim)
+- Telescope (https://github.com/nvim-telescope/telescope.nvim)
 
 ## Commands
 The config has some custom commands, all placed in lua/commands
-```:CreateCProject <dir>``` - Creates a file providing C/GNU syntax
-```:Keymaps``` - Opens the file where all keymaps are defined
+- ```:CreateCProject <dir>``` - Creates a file providing C/GNU syntax
+- ```:Keymaps``` - Opens the file where all keymaps are defined
 
 ## Installation
 Make sure nvim is installed. Then
 ```git clone https://github.com/lasotar/nvim-config ~/.config/nvim```
 
 ## Extending
-If you want to add your own plugins, edit the lua/plugins/plugin_list.lua file.
-If you want to add your own commands, add the file with the command to lua/commands and register it in the lua/commads/command_register.lua file
+- If you want to add your own plugins, edit the lua/plugins/plugin_list.lua file.
+- If you want to add your own commands, add the file with the command to lua/commands and register it in the lua/commads/command_register.lua file
 
 ## Prerequisites
 - A nerd font (for example JetBrains nerd font)
+- Ripgrep
 
 ## Future
 Current TODO list:
-- Add and configure telescope  Priority: High
-- Add bufferline keymaps  Priority: High
-- Make comment.nvim keymaps editable  Priority: Low
-- Add and configure mini.nvim  Priority: Medium
+- Make comment.nvim keymaps editable        Priority: Low
+- Add and configure mini.nvim               Priority: Medium
+- Add a colorizer                           Priority: Medium
+- Add C debugger                            Priority: Medium
+- Make it suitable for C++                  Priority: Medium
+- Make the config work for Angular webdev   Priority: Low
 
 ## FAQ
 How to change the theme?
