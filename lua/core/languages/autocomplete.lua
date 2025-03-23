@@ -24,9 +24,6 @@ cmp.setup({
       return vim_item
     end,
   },
-  experimental = {
-    ghost_text = true, -- Enable ghost text
-  },
   preselect = cmp.PreselectMode.Item, -- Auto-select the first item
 })
 

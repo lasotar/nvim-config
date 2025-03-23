@@ -58,4 +58,13 @@ return
             require("gitsigns").setup()
         end,
     },
+    -- AI code completion
+    {
+      "monkoose/neocodeium",
+      event = "VeryLazy",
+      config = function()
+        local neocodeium = require("neocodeium")
+        neocodeium.setup()
+      end,
+    },
 }

@@ -39,9 +39,14 @@ local function set_keymaps()
   vim.keymap.set("n", "<leader>fb", telescope.buffers, { desc = "Find buffers" })
   vim.keymap.set("n", "<leader>fh", telescope.help_tags, { desc = "Help tags" })
 
+  -- AI code completion
+  local neocodeium = require("neocodeium")
+  vim.keymap.set("i", "<C-Space>", neocodeium.accept)
+
 end
 
 return set_keymaps
+
 
 -- MINI GUIDE: THE AWESOME KEYMAPS
 -- Neovim Keymap Guide: mini.ai, mini.surround, and mini.operators

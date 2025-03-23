@@ -29,3 +29,6 @@ vim.opt.splitbelow = true      -- Open horizontal splits below
 vim.opt.ignorecase = true      -- Case-insensitive search
 
 vim.opt.smartcase = true       -- Case-sensitive search if uppercase is used
+
+vim.g.loaded_netrw = 1         -- Disable netrw
+vim.g.loaded_netrwPlugin = 1

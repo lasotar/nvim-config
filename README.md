@@ -42,7 +42,11 @@ Make sure nvim is installed. Then
 Current TODO list:
 - Add C debugger                                Priority: Medium
 - Make the config work for Angular webdev       Priority: Low
+- Make AI code completion togglable             Priority: Low 
 
 ## FAQ
 How to change the theme?
 - You can edit the theme in lua/core/visual.lua. Just replace the existing one. Then, change the other hexcodes in visual.lua
+
+How to use AI code completion?
+- ```:Neocodeium auth``` then fill with the token provided by Codeium.
