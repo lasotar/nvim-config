@@ -9,6 +9,7 @@ Other plugins are placed in lua/plugins
 - Lazy.nvim (https://github.com/folke/lazy.nvim)
 - Treesitter (https://github.com/nvim-treesitter/nvim-treesitter)
 - Mason.nvim (https://github.com/williamboman/mason.nvim)
+- Gitsigns.nvim (https://github.com/lewis6991/gitsigns.nvim)
 
 ### Graphical plugins
 - Default theme: Highly customized Carbonfox theme (https://github.com/EdenEast/nightfox.nvim)

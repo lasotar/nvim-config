@@ -52,4 +52,10 @@ return
         -- Add more mini.nvim modules as needed
       end,
     },
+    {
+        "https://github.com/lewis6991/gitsigns.nvim",
+        config = function()
+            require("gitsigns").setup()
+        end,
+    },
 }
