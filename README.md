@@ -40,7 +40,6 @@ Make sure nvim is installed. Then
 ## Future
 Current TODO list:
 - Add C debugger                                Priority: Medium
-- Make it suitable for C++                      Priority: Medium
 - Make the config work for Angular webdev       Priority: Low
 
 ## FAQ

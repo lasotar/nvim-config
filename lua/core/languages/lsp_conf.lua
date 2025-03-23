@@ -12,5 +12,11 @@ lspconfig.clangd.setup({
   capabilities = require("cmp_nvim_lsp").default_capabilities(),
   on_attach = function(client, bufnr)
     local opts = { buffer = bufnr }
+    client.server_capabilities.signatureHelpProvider = false
   end,
+  cmd = {
+    "clangd",
+    "--log=verbose",  -- Enable verbose logging
+    "--background-index",  -- Enable background indexing
+  },
 })
