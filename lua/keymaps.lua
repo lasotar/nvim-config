@@ -1,6 +1,8 @@
 local function set_keymaps()
   -- General mappings
   vim.g.mapleader = " "
+  vim.keymap.set("n", "<C-d>", "<C-d>zz")
+  vim.keymap.set("n", "<C-u>", "<C-u>zz") -- Centers screen on scroll
 
   -- LSP mappings
   vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Go to definition" })
@@ -25,6 +27,11 @@ local function set_keymaps()
   -- gc (normal): toggle linewise
   -- no need for anything else rly
 
+  -- Diagnostics
+  vim.keymap.set("n", "<leader>DD", vim.diagnostic.open_float, { desc = "Open diagnostics" })
+  vim.keymap.set("n", "<leader>Dn", vim.diagnostic.goto_next, { desc = "Next diagnostic" })
+  vim.keymap.set("n", "<leader>Dp", vim.diagnostic.goto_prev, { desc = "Previous diagnostic" })
+
   -- Bufferline
   vim.keymap.set("n", "<leader><Tab>", ":bnext<CR>", { desc = "Next buffer", silent = true })
   vim.keymap.set("n", "<leader>d<Tab>", ":bd<CR>", { desc = "Close current buffer", silent = true })
@@ -43,10 +50,12 @@ local function set_keymaps()
   local neocodeium = require("neocodeium")
   vim.keymap.set("i", "<C-Space>", neocodeium.accept)
 
+  -- Toggle AI suggestions
+  vim.keymap.set("n", "<leader>tc", ":NeoCodeium toggle<CR>", { desc = "Toggle AI suggestions" })
+
 end
 
 return set_keymaps
-
 
 -- MINI GUIDE: THE AWESOME KEYMAPS
 -- Neovim Keymap Guide: mini.ai, mini.surround, and mini.operators

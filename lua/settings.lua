@@ -2,7 +2,7 @@
 
 vim.opt.number = true          -- Enable line numbers
 
-vim.opt.relativenumber = false  -- Enable relative line numbers
+vim.opt.relativenumber = true  -- Enable relative line numbers
 
 vim.opt.tabstop = 4            -- Set tab width to 4 spaces
 
@@ -32,3 +32,5 @@ vim.opt.smartcase = true       -- Case-sensitive search if uppercase is used
 
 vim.g.loaded_netrw = 1         -- Disable netrw
 vim.g.loaded_netrwPlugin = 1
+
+vim.opt.mouse = ""             -- Disable mouse

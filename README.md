@@ -20,6 +20,7 @@ Other plugins are placed in lua/plugins
 - Neo-tree (https://github.com/nvim-neo-tree/neo-tree.nvim)
 - Telescope (https://github.com/nvim-telescope/telescope.nvim)
 - Mini.nvim (https://github.com/echasnovski/mini.nvim)
+- NeoCodeium (https://github.com/monkoose/neocodeium)
 
 ## Commands
 The config has some custom commands, all placed in lua/commands

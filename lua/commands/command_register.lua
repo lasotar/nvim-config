@@ -8,3 +8,4 @@ end, {
   nargs = 1, -- Require exactly one argument
   desc = "Generate compile_commands.json in the specified project root",
 })
+
