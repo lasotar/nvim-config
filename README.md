@@ -22,7 +22,7 @@ Other plugins are placed in lua/plugins
 - Mini.nvim (https://github.com/echasnovski/mini.nvim)
 - NeoCodeium (https://github.com/monkoose/neocodeium)
 - HardTime (https://github.com/m4xshen/hardtime.nvim)
-- Precognition (https://github.com/monkoose/precognition.nvim)
+- Precognition (https://github.com/tris203/precognition.nvim)
 
 ## Commands
 The config has some custom commands, all placed in lua/commands
