@@ -21,11 +21,14 @@ Other plugins are placed in lua/plugins
 - Telescope (https://github.com/nvim-telescope/telescope.nvim)
 - Mini.nvim (https://github.com/echasnovski/mini.nvim)
 - NeoCodeium (https://github.com/monkoose/neocodeium)
+- HardTime (https://github.com/m4xshen/hardtime.nvim)
+- Precognition (https://github.com/monkoose/precognition.nvim)
 
 ## Commands
 The config has some custom commands, all placed in lua/commands
 - ```:CreateCProject <dir>``` - Creates a file providing C/GNU syntax
 - ```:Keymaps``` - Opens the file where all keymaps are defined
+- ```:NeoCodeium toggle``` - Toggles the AI code completion
 
 ## Installation
 Make sure nvim is installed. Then
@@ -42,9 +45,6 @@ Make sure nvim is installed. Then
 ## Future
 Current TODO list:
 - Add C debugger                                Priority: Medium
-- Make the config work for Angular webdev       Priority: Low
-- Make AI code completion togglable             Priority: Low 
-
 ## FAQ
 How to change the theme?
 - You can edit the theme in lua/core/visual.lua. Just replace the existing one. Then, change the other hexcodes in visual.lua
