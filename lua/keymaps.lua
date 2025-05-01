@@ -28,13 +28,23 @@ local function set_keymaps()
   -- no need for anything else rly
 
   -- Diagnostics
-  vim.keymap.set("n", "<leader>DD", vim.diagnostic.open_float, { desc = "Open diagnostics" })
-  vim.keymap.set("n", "<leader>Dn", vim.diagnostic.goto_next, { desc = "Next diagnostic" })
-  vim.keymap.set("n", "<leader>Dp", vim.diagnostic.goto_prev, { desc = "Previous diagnostic" })
+  vim.keymap.set("n", "]]", vim.diagnostic.open_float, { desc = "Open diagnostics" })
+  vim.keymap.set("n", "]n", vim.diagnostic.goto_next, { desc = "Next diagnostic" })
+  vim.keymap.set("n", "]p", vim.diagnostic.goto_prev, { desc = "Previous diagnostic" })
 
   -- Bufferline
   vim.keymap.set("n", "<leader><Tab>", ":bnext<CR>", { desc = "Next buffer", silent = true })
   vim.keymap.set("n", "<leader>d<Tab>", ":bd<CR>", { desc = "Close current buffer", silent = true })
+
+  for i = 1, 9 do 
+    vim.keymap.set("n", "<leader>" .. i .. "<Tab>", function()
+      local bufs = vim.fn.getbufinfo({ buflisted = 1 })
+      local target = bufs[i]
+      if target then
+        vim.api.nvim_set_current_buf(target.bufnr)
+      end
+    end, { desc = "Go to buffer " .. i, silent = true })
+  end
 
   -- Neo-tree
   vim.keymap.set("n", "<leader>e", "<Cmd>Neotree toggle<CR>", { desc = "Toggle NeoTree" })

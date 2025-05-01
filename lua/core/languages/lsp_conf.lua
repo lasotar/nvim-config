@@ -20,3 +20,12 @@ lspconfig.clangd.setup({
     "--background-index",  -- Enable background indexing
   },
 })
+
+lspconfig.omnisharp.setup({
+  cmd = { "omnisharp" },
+  enable_import_completion = true,
+  organize_imports_on_format = true,
+  handlers = {
+    ["textDocument/definition"] = require('omnisharp_extended').handler,
+  },
+})

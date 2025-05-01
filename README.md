@@ -5,11 +5,15 @@ A neovim configuration written completely from scratch - no distributions, no pr
 Core plugins as well as the graphical interface (theme, statusline, etc.) are placed in the lua/core directory.
 Other plugins are placed in lua/plugins
 
+## Programming languages/frameworks
+- C
+- C++
+- C#
+
 ### Core plugins (do not edit)
 - Lazy.nvim (https://github.com/folke/lazy.nvim)
 - Treesitter (https://github.com/nvim-treesitter/nvim-treesitter)
 - Mason.nvim (https://github.com/williamboman/mason.nvim)
-- Gitsigns.nvim (https://github.com/lewis6991/gitsigns.nvim)
 
 ### Graphical plugins
 - Default theme: Highly customized Carbonfox theme (https://github.com/EdenEast/nightfox.nvim)
@@ -22,7 +26,8 @@ Other plugins are placed in lua/plugins
 - Mini.nvim (https://github.com/echasnovski/mini.nvim)
 - NeoCodeium (https://github.com/monkoose/neocodeium)
 - HardTime (https://github.com/m4xshen/hardtime.nvim)
-- Precognition (https://github.com/tris203/precognition.nvim)
+- Precognition (https://github.com/tris203/precognition.nvim) (disabled by default, change in plugin_list.lua)
+- Gitsigns.nvim (https://github.com/lewis6991/gitsigns.nvim)
 
 ## Commands
 The config has some custom commands, all placed in lua/commands

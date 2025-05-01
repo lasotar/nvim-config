@@ -59,7 +59,7 @@ require("lualine").setup({
         show_filename_only = true, -- Show only the filename, not the full path
         show_modified_status = true, -- Show a + if the buffer is modified
         mode = 2, -- 0: Shows buffer name, 1: Shows buffer index, 2: Shows buffer name + buffer index
-        max_length = vim.o.columns * 2 / 3, -- Maximum width of the buffers component
+        max_length = vim.o.columns, -- Maximum width of the buffers component
         filetype_names = {
           TelescopePrompt = "Telescope",
           dashboard = "Dashboard",
@@ -68,7 +68,7 @@ require("lualine").setup({
           alpha = "Alpha",
         }, -- Customize the display name for specific filetypes
         buffers_color = {
-          active = { fg = "#ffffff", bg = "#1a1a1a" }, -- Custom colors for active buffer
+          active = { fg = "#ffffff", bg = "#2a2a2a" }, -- Custom colors for active buffer
           inactive = { fg = "#d8dee9", bg = "#0a0a0a" }, -- Custom colors for inactive buffers
         },
       },
