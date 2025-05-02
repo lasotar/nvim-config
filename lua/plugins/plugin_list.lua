@@ -67,17 +67,22 @@ return
         neocodeium.setup()
       end,
     },
+    -- better replace
+    {
+        "nvim-pack/nvim-spectre"
+    },
+    -- C# goto definition support
+    {
+      "Hoffs/omnisharp-extended-lsp.nvim",
+      dependencies = { "neovim/nvim-lspconfig" },
+    },
+
     -- Based
     {
        "m4xshen/hardtime.nvim",
        dependencies = { "MunifTanjim/nui.nvim" },
        opts = {}
     },
-    -- C# goto definition support
-    {
-      "Hoffs/omnisharp-extended-lsp.nvim",
-      dependencies = { "neovim/nvim-lspconfig" },
-    }
 
     -- Tutorial motions
     -- {
