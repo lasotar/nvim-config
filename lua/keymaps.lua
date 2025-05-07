@@ -63,6 +63,8 @@ local function set_keymaps()
   -- Toggle AI suggestions
   vim.keymap.set("n", "<leader>tc", ":NeoCodeium toggle<CR>", { desc = "Toggle AI suggestions" })
 
+  -- Find and Replace with Spectre
+  vim.keymap.set("n", "<leader>fr", ":Spectre<CR>", { desc = "Find and Replace", silent = true })
 end
 
 return set_keymaps

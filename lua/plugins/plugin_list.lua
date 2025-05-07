@@ -11,6 +11,9 @@ return
       },
       config = function()
         require("plugins.neo-tree")
+          vim.cmd([[highlight NeoTreeNormal guibg=#0b0d13]]) -- Set background for Neo-tree
+          vim.cmd([[highlight NeoTreeDirectory guibg=#0b0d13]]) -- Set background for Neo-tree directories
+          vim.cmd([[highlight NeoTreeFile guibg=#0b0d13]])
       end,
     },
     {

@@ -11,11 +11,11 @@ return {
         callback = function()
           -- Custom highlights
           vim.api.nvim_set_hl(0, "Comment", { fg = "#D2B48C", italic = false }) -- Brighter comments (beige)
-          vim.api.nvim_set_hl(0, "Normal", { bg = "#0a0a0a" }) -- Darker background (black)
-          vim.api.nvim_set_hl(0, "NormalFloat", { bg = "#0a0a0a" }) -- Darker background for floating windows
-          vim.api.nvim_set_hl(0, "CursorLine", { bg = "#161616" }) -- Darker highlighted line
+          vim.api.nvim_set_hl(0, "Normal", { bg = "#0b0d13" }) -- Darker background (really dark blue)
+          vim.api.nvim_set_hl(0, "NormalFloat", { bg = "#0b0d13" }) -- Darker background for floating windows
+          vim.api.nvim_set_hl(0, "CursorLine", { bg = "#1b1d23" }) -- Darker highlighted line
           vim.api.nvim_set_hl(0, "Cursor", { fg = "#EEEEEE", bg = "#FF0000" }) -- Custom cursor color
-          vim.api.nvim_set_hl(0, "NormalNC", { bg = "#0a0a0a" }) -- Match inactive window background
+          vim.api.nvim_set_hl(0, "NormalNC", { bg = "#0b0d13" }) -- Match inactive window background
           vim.api.nvim_set_hl(0, "WinSeparator", { fg = "#333333", bg = "#0a0a0a" }) -- Customize window separator
           vim.api.nvim_set_hl(0, "@property", { fg = "#5e7aca" }) -- Dark blue struct fields
         end,
@@ -24,17 +24,19 @@ return {
       vim.cmd([[colorscheme carbonfox]])
     end,
   },
-  -- Statusline
+
+-- Statusline
   {
     "nvim-lualine/lualine.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" }, -- Optional: for icons
     config = function()
 require("lualine").setup({
   options = {
-    theme = "carbonfox", -- Match your theme (or use "auto" for automatic theme detection)
+    theme = "horizon",
     icons_enabled = true, -- Enable icons (requires a patched font or nvim-web-devicons)
     component_separators = { left = "", right = "" }, -- Separators between components
     section_separators = { left = "", right = "" }, -- Separators between sections
+    globalstatus = true,
   },
   sections = {
     lualine_a = { "mode" }, -- Left section (mode)
@@ -68,8 +70,8 @@ require("lualine").setup({
           alpha = "Alpha",
         }, -- Customize the display name for specific filetypes
         buffers_color = {
-          active = { fg = "#ffffff", bg = "#2a2a2a" }, -- Custom colors for active buffer
-          inactive = { fg = "#d8dee9", bg = "#0a0a0a" }, -- Custom colors for inactive buffers
+          active = { fg = "#ffffff", bg = "#2b2d33" }, -- Custom colors for active buffer
+          inactive = { fg = "#d8dee9", bg = "#0b0d13" }, -- Custom colors for inactive buffers
         },
       },
     },
@@ -78,3 +80,4 @@ require("lualine").setup({
     end,
   },
 }
+

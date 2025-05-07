@@ -46,6 +46,8 @@ Make sure nvim is installed. Then
 ## Prerequisites
 - A nerd font (for example JetBrains nerd font)
 - Ripgrep
+- Unzip
+- Xclip or another clipboard provider
 
 ## Future
 Current TODO list:
