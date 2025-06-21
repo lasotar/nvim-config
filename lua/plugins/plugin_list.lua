@@ -79,6 +79,16 @@ return
       "Hoffs/omnisharp-extended-lsp.nvim",
       dependencies = { "neovim/nvim-lspconfig" },
     },
+    -- LaTeX
+    {
+      "lervag/vimtex",
+      lazy = false,
+      init = function()
+        vim.g.vimtex_view_method = "zathura" -- or skim, okular, etc.
+        vim.g.vimtex_compiler_method = "latexmk"
+      end,
+    },
+
 
     -- Based
     {

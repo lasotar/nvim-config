@@ -5,10 +5,10 @@ local function set_keymaps()
   vim.keymap.set("n", "<C-u>", "<C-u>zz") -- Centers screen on scroll
 
   -- LSP mappings
-  vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Go to definition" })
-  vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Show documentation" })
+  vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition, { desc = "Go to definition" })
+  vim.keymap.set("n", "<leader>K", vim.lsp.buf.hover, { desc = "Show documentation" })
   vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { desc = "Rename symbol" })
-  vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Code actions" })
+  vim.keymap.set("n", "<M-CR>", vim.lsp.buf.code_action, { desc = "Code actions" })
   vim.keymap.set("n", "<leader>f", vim.lsp.buf.format, { desc = "Format code" })
 
   -- nvim-cmp mappings
