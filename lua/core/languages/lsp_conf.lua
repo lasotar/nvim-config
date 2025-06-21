@@ -1,7 +1,7 @@
 -- Mason setup
 require("mason").setup()
 require("mason-lspconfig").setup({
-  ensure_installed = { "clangd", "tsserver", "cssls", "omnisharp" },
+  ensure_installed = { "clangd", "typescript-language-server", "cssls", "omnisharp" },
 })
 
 -- Common LSP on_attach function (customize as needed)
@@ -43,8 +43,8 @@ lspconfig.omnisharp.setup({
   },
 })
 
--- tsserver setup (typescript/javascript)
-lspconfig.tsserver.setup({
+-- typescript setup
+lspconfig.ts_ls.setup({
   capabilities = capabilities,
   on_attach = on_attach,
   flags = {
