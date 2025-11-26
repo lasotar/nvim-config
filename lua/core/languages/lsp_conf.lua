@@ -1,7 +1,7 @@
 -- Mason setup
 require("mason").setup()
 require("mason-lspconfig").setup({
-  ensure_installed = { "clangd", "typescript-language-server", "cssls", "omnisharp" },
+  ensure_installed = { "clangd", "cssls", "omnisharp", "r_language_server", "ts_ls" },
 })
 
 -- Common LSP on_attach function (customize as needed)
@@ -66,4 +66,11 @@ lspconfig.cssls.setup({
   capabilities = capabilities,
   on_attach = on_attach,
   filetypes = { "css", "scss", "less" },
+})
+
+-- r_language_server setup
+lspconfig.r_language_server.setup({
+  capabilities = capabilities,
+  on_attach = on_attach,
+  filetypes = { "r", "rmd" },
 })

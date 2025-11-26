@@ -67,6 +67,11 @@ local function set_keymaps()
   vim.keymap.set("n", "<leader>fr", ":Spectre<CR>", { desc = "Find and Replace", silent = true })
 end
 
+  -- LaTeX
+  -- \ll : compile
+  -- \lv : view
+  -- \lr : run
+
 return set_keymaps
 
 -- MINI GUIDE: THE AWESOME KEYMAPS
