@@ -11,9 +11,15 @@ if not vim.loop.fs_stat(lazypath) then
   })
 end
 vim.opt.rtp:prepend(lazypath)
+vim.opt.rtp:prepend(vim.fn.stdpath("data"))
 
 -- Load plugins
 require("lazy").setup({
+  {
+      "stevearc/vim-arduino",
+      dependencies = { "tpope/vim-fugitive" },
+      ft = { "ino", "pde" },
+  },
   -- Treesitter
   {
     "nvim-treesitter/nvim-treesitter",

@@ -70,9 +70,17 @@ return
         neocodeium.setup()
       end,
     },
-    -- better replace
+    -- Find and Replace
     {
         "nvim-pack/nvim-spectre"
+    },
+    -- Which-key
+    {
+      "folke/which-key.nvim",
+      event = "VeryLazy",
+      config = function()
+        require("plugins.which-key")
+      end,
     },
     -- C# goto definition support
     {
@@ -88,44 +96,145 @@ return
         vim.g.vimtex_compiler_method = "latexmk"
       end,
     },
-
-
-    -- Based
+    -- Image support (required for Molten images)
     {
-       "m4xshen/hardtime.nvim",
-       dependencies = { "MunifTanjim/nui.nvim" },
-       opts = {}
+      "3rd/image.nvim",
+      opts = {
+        backend = "kitty",
+        integrations = {
+          markdown = {
+            enabled = true,
+            clear_in_insert_mode = false,
+            download_remote_images = true,
+            only_render_image_at_cursor = false,
+            filetypes = { "markdown", "vimwiki", "python" }, -- Added python for Jupytext
+          },
+        },
+        max_width = 100,
+        max_height = 25,
+        max_height_window_percentage = math.huge,
+        max_width_window_percentage = math.huge,
+        window_overlap_clear_enabled = true,
+        window_overlap_clear_ft_ignore = { "cmp_menu", "cmp_docs", "" },
+      },
     },
+    -- Molten (Jupyter in Neovim)
+    {
+      'benlubas/molten-nvim',
+      version = '^1.0.0', -- use version <2.0.0 to avoid breaking changes
+      dependencies = { '3rd/image.nvim' },
+      build = ':UpdateRemotePlugins',
+      lazy = false,
+      init = function()
+        -- these are examples, not defaults. Please see the readme
+        vim.g.molten_image_provider = 'image.nvim'
+        vim.g.molten_output_win_max_height = 20
+      end,
+      config = function()
+        -- Paste the notebook command code here!
+        -- Template for a minimal, valid Python notebook
+        local default_notebook = [[
+        {
+          "cells": [
+           {
+            "cell_type": "markdown",
+            "metadata": {},
+            "source": [
+              ""
+            ]
+           }, 
+	   {
+	      "cell_type": "code",
+	      "metadata": {},
+	      "source": [
+		"print('Hello from Molten Python cell!')"
+	      ],
+	      "outputs": [],
+	      "execution_count": null
+	    }
+          ],
+          "metadata": {
+           "kernelspec": {
+            "display_name": "Python 3",
+            "language": "python",
+            "name": "python3"
+           },
+           "language_info": {
+            "codemirror_mode": {
+              "name": "ipython"
+            },
+            "file_extension": ".py",
+            "mimetype": "text/x-python",
+            "name": "python",
+            "nbconvert_exporter": "python",
+            "pygments_lexer": "ipython3"
+           }
+          },
+          "nbformat": 4,
+          "nbformat_minor": 5
+        }
+      ]]
 
-    -- Tutorial motions
-    -- {
-    -- "tris203/precognition.nvim",
-    -- --event = "VeryLazy",
-    -- opts = {
-    -- -- startVisible = true,
-    -- -- showBlankVirtLine = true,
-    -- -- highlightColor = { link = "Comment" },
-    -- -- hints = {
-    -- --      Caret = { text = "^", prio = 2 },
-    -- --      Dollar = { text = "$", prio = 1 },
-    -- --      MatchingPair = { text = "%", prio = 5 },
-    -- --      Zero = { text = "0", prio = 1 },
-    -- --      w = { text = "w", prio = 10 },
-    -- --      b = { text = "b", prio = 9 },
-    -- --      e = { text = "e", prio = 8 },
-    -- --      W = { text = "W", prio = 7 },
-    -- --      B = { text = "B", prio = 6 },
-    -- --      E = { text = "E", prio = 5 },
-    -- -- },
-    -- -- gutterHints = {
-    -- --     G = { text = "G", prio = 10 },
-    -- --     gg = { text = "gg", prio = 9 },
-    -- --     PrevParagraph = { text = "{", prio = 8 },
-    -- --     NextParagraph = { text = "}", prio = 8 },
-    -- -- },
-    -- -- disabled_fts = {
-    -- --     "startify",
-    -- -- },
-    -- },
--- }
+        local function new_notebook(filename)
+          local path = filename .. '.ipynb'
+          local file = io.open(path, 'w')
+          if file then
+            file:write(default_notebook)
+            file:close()
+            vim.cmd('edit ' .. path)
+          else
+            print 'Error: Could not open new notebook file for writing.'
+          end
+        end
+
+        vim.api.nvim_create_user_command('NewNotebook', function(opts)
+          new_notebook(opts.args)
+        end, {
+          nargs = 1,
+          complete = 'file',
+        })
+      end,
+    },
+    -- Jupytext (Notebook as scripts)
+    {
+      "goerz/jupytext.vim",
+      lazy = false,
+      init = function()
+        vim.g.jupytext_fmt = 'py:percent'
+        vim.g.jupytext_enable_py = 1
+      end,
+    },
+    -- Render markdown in Neovim (for Jupytext/Notebooks)
+    {
+        'MeanderingProgrammer/render-markdown.nvim',
+        dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' },
+        opts = {
+            file_types = { 'markdown', 'python' }, -- Enable for python files (Jupytext)
+            anti_conceal = { enabled = true },
+        },
+    },
+    -- Improved rendering for Jupytext
+    {
+        'cmorales95/jupytext-render.nvim',
+        dependencies = { 'MeanderingProgrammer/render-markdown.nvim' },
+        opts = {
+            -- Keymap for toggling is <leader>mM by default, but we'll use <leader>tm in keymaps.lua
+        },
+        config = true,
+    },
+    -- Notebook Navigator (better cell navigation)
+    {
+      "GCBallesteros/NotebookNavigator.nvim",
+      dependencies = {
+        "echasnovski/mini.comment",
+        "hkupty/iron.nvim", -- Optional REPL support
+        "nvimtools/hydra.nvim", -- Use the maintained version
+      },
+      config = function()
+        local nn = require("notebook-navigator")
+        nn.setup({
+          repl_provider = "molten",
+        })
+      end,
+    },
 }

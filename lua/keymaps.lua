@@ -47,7 +47,7 @@ local function set_keymaps()
   end
 
   -- Neo-tree
-  vim.keymap.set("n", "<leader>e", "<Cmd>Neotree toggle<CR>", { desc = "Toggle NeoTree" })
+  vim.keymap.set("n", "<leader>e", ":Neotree toggle<CR>", { desc = "Toggle NeoTree", silent = true })
 
   -- Keybindings for Telescope
   local telescope = require("telescope.builtin")
@@ -57,14 +57,109 @@ local function set_keymaps()
   vim.keymap.set("n", "<leader>fh", telescope.help_tags, { desc = "Help tags" })
 
   -- AI code completion
-  local neocodeium = require("neocodeium")
-  vim.keymap.set("i", "<C-Space>", neocodeium.accept)
-
-  -- Toggle AI suggestions
-  vim.keymap.set("n", "<leader>tc", ":NeoCodeium toggle<CR>", { desc = "Toggle AI suggestions" })
+  local ok, neocodeium = pcall(require, "neocodeium")
+  if ok then
+    vim.keymap.set("i", "<C-Space>", neocodeium.accept)
+    -- Toggle AI suggestions
+    vim.keymap.set("n", "<leader>tc", ":NeoCodeium toggle<CR>", { desc = "Toggle AI suggestions" })
+  end
 
   -- Find and Replace with Spectre
   vim.keymap.set("n", "<leader>fr", ":Spectre<CR>", { desc = "Find and Replace", silent = true })
+
+  -- Molten (Jupyter in Neovim)
+  vim.keymap.set("n", "<leader>mi", function()
+    local kernel = vim.fn.input("Kernel name (default: python3): ")
+    if kernel == "" then kernel = "python3" end
+    vim.cmd("MoltenInit " .. kernel)
+  end, { desc = "Initialize Molten with Kernel" })
+  vim.keymap.set("n", "<leader>mj", ":CreateJupyterVenv<CR>", { silent = true, desc = "Create Jupyter Venv" })
+  vim.keymap.set("n", "<leader>ir", ":MoltenRestart<CR>", { silent = true, desc = "Restart Molten" })
+  vim.keymap.set("n", "<leader>rd", ":MoltenDelete<CR>", { silent = true, desc = "Molten Delete Cell" })
+  vim.keymap.set("n", "<leader>re", ":MoltenEvaluateOperator<CR>", { silent = true, desc = "Evaluate Operator" })
+  vim.keymap.set("n", "<leader>rl", ":MoltenEvaluateLine<CR>", { silent = true, desc = "Evaluate Line" })
+  vim.keymap.set("n", "<leader>rc", ":MoltenReevaluateCell<CR>", { silent = true, desc = "Re-evaluate Cell" })
+  vim.keymap.set("v", "<leader>rv", ":<C-u>MoltenEvaluateVisual<CR>gv", { silent = true, desc = "Evaluate Visual Selection" })
+  vim.keymap.set("n", "<leader>os", ":MoltenShowOutput<CR>", { silent = true, desc = "Show Output" })
+  vim.keymap.set("n", "<leader>oh", ":MoltenHideOutput<CR>", { silent = true, desc = "Hide Output" })
+  vim.keymap.set("n", "<leader>oi", ":MoltenInterrupt<CR>", { silent = true, desc = "Interrupt Kernel" })
+
+  -- Notebook Navigator
+  local nn = require("notebook-navigator")
+  vim.keymap.set("n", "]h", function() nn.move_cell("d") end, { desc = "Next cell" })
+  vim.keymap.set("n", "[h", function() nn.move_cell("u") end, { desc = "Previous cell" })
+  vim.keymap.set("n", "<leader>X", function() nn.run_cell() end, { desc = "Run cell" })
+  vim.keymap.set("n", "<leader>x", function() nn.run_and_move() end, { desc = "Run cell and move" })
+  vim.keymap.set("n", "<leader>ma", function() nn.add_cell_after() end, { desc = "Add Code cell after" })
+  vim.keymap.set("n", "<leader>mb", function() nn.add_cell_before() end, { desc = "Add Code cell before" })
+  vim.keymap.set("n", "<leader>mm", function()
+    vim.cmd("normal! o# %% [markdown]\n")
+    vim.cmd("startinsert")
+  end, { desc = "Add Markdown cell after" })
+  vim.keymap.set("n", "<leader>mM", function()
+    vim.cmd("normal! O# %% [markdown]\n")
+    vim.cmd("startinsert")
+  end, { desc = "Add Markdown cell before" })
+  vim.keymap.set("n", "<leader>md", function() 
+    vim.cmd("MoltenDelete") -- Clear output
+    -- Delete the text of the cell (uses NotebookNavigator internal logic if available, or simple delete)
+    local ok_delete, _ = pcall(nn.split_cell) -- This is a trick to delete if we are in one
+    vim.cmd("normal! dip") -- Delete inner paragraph (usually the cell content)
+  end, { desc = "Delete cell content and output" })
+
+  -- Manual Hydra definition
+  vim.api.nvim_create_autocmd("User", {
+    pattern = "VeryLazy",
+    callback = function()
+      local ok_nn, nn_hydra = pcall(require, "notebook-navigator")
+      local ok_hydra, Hydra = pcall(require, "hydra")
+      if ok_nn and ok_hydra then
+        Hydra({
+          name = "Notebook",
+          mode = "n",
+          body = "<leader>nh",
+          config = {
+            color = "amaranth", -- amaranth correctly overwrites keys unlike red
+            invoke_on_body = true,
+            hint = {
+              border = "rounded",
+              position = "bottom",
+            },
+          },
+          hint = " [j/k]: Move  [x]: Run  [a/b]: Code  [m/M]: Markdown  [d]: Delete  [c]: Comment  [q/Esc]: Exit ",
+          heads = {
+            { "j", function() nn_hydra.move_cell("d") end },
+            { "k", function() nn_hydra.move_cell("u") end },
+            { "x", ":MoltenReevaluateCell<CR>", { silent = true } },
+            { "X", ":MoltenEvaluateOperator<CR>", { silent = true } },
+            { "a", function() nn_hydra.add_cell_after() end },
+            { "b", function() nn_hydra.add_cell_before() end },
+            { "m", function()
+              vim.cmd("normal! o# %% [markdown]\n")
+              vim.cmd("startinsert")
+            end },
+            { "M", function()
+              vim.cmd("normal! O# %% [markdown]\n")
+              vim.cmd("startinsert")
+            end },
+            { "d", function()
+              vim.cmd("MoltenDelete")
+              vim.cmd("normal! dip") 
+            end, { silent = true } },
+            { "c", function() nn_hydra.comment_cell() end },
+            { "q", nil, { exit = true, nowait = true } },
+            { "<Esc>", nil, { exit = true, nowait = true } },
+          },
+        })
+      end
+    end,
+  })
+
+  -- Toggle Notebook/Markdown Rendering
+  vim.keymap.set("n", "<leader>tm", function()
+    require("jupytext-render").toggle()
+    require("render-markdown").toggle()
+  end, { desc = "Toggle Notebook Rendering", silent = true })
 end
 
   -- LaTeX

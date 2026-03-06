@@ -33,4 +33,10 @@ vim.opt.smartcase = true       -- Case-sensitive search if uppercase is used
 vim.g.loaded_netrw = 1         -- Disable netrw
 vim.g.loaded_netrwPlugin = 1
 
-vim.opt.mouse = ""             -- Disable mouse
+-- Set python3 provider to local venv if it exists
+local venv_path = vim.fn.getcwd() .. "/.venv/bin/python3"
+if vim.fn.executable(venv_path) == 1 then
+    vim.g.python3_host_prog = venv_path
+end
+
+vim.opt.mouse = ""             -- Disable mouse support
