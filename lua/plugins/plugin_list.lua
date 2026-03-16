@@ -61,14 +61,58 @@ return
             require("gitsigns").setup()
         end,
     },
-    -- AI code completion
+    -- AI code completion & Chat
     {
-      "monkoose/neocodeium",
-      event = "VeryLazy",
+      "zbirenbaum/copilot.lua",
+      cmd = "Copilot",
+      event = "InsertEnter",
       config = function()
-        local neocodeium = require("neocodeium")
-        neocodeium.setup()
+        require("copilot").setup({
+          suggestion = {
+            enabled = true,
+            auto_trigger = true,
+            hide_during_completion = false,
+            debounce = 75,
+            keymap = {
+              accept = false, -- Handled in keymaps.lua
+              accept_word = false,
+              accept_line = false,
+              next = false,
+              prev = false,
+              dismiss = false,
+            },
+          },
+          panel = { enabled = false },
+        })
       end,
+    },
+    {
+      "CopilotC-Nvim/CopilotChat.nvim",
+      branch = "main",
+      dependencies = {
+        { "zbirenbaum/copilot.lua" },
+        { "nvim-lua/plenary.nvim" },
+        { "nvim-telescope/telescope.nvim" }, -- Ensure telescope is a dependency
+      },
+      build = "make install", 
+      opts = {
+        debug = false,
+        show_help = true, -- Shows a help block at the top of the chat
+        window = {
+          layout = 'vertical',
+          width = 0.3, -- 30% of the screen width
+        },
+        question_header = "## User ",
+        answer_header = "## Copilot ",
+        error_header = "## Error ",
+        separator = "───",
+        -- Use telescope for context and help actions
+        mappings = {
+          complete = {
+            insert = "<Tab>",
+          },
+        },
+      },
     },
     -- Find and Replace
     {

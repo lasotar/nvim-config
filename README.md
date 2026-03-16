@@ -24,7 +24,8 @@ Other plugins are placed in lua/plugins
 - Neo-tree (https://github.com/nvim-neo-tree/neo-tree.nvim)
 - Telescope (https://github.com/nvim-telescope/telescope.nvim)
 - Mini.nvim (https://github.com/echasnovski/mini.nvim)
-- NeoCodeium (https://github.com/monkoose/neocodeium)
+- GitHub Copilot (https://github.com/zbirenbaum/copilot.lua)
+- Copilot Chat (https://github.com/CopilotC-Nvim/CopilotChat.nvim)
 - HardTime (https://github.com/m4xshen/hardtime.nvim)
 - Precognition (https://github.com/tris203/precognition.nvim) (disabled by default, change in plugin_list.lua)
 - Gitsigns.nvim (https://github.com/lewis6991/gitsigns.nvim)
@@ -33,7 +34,8 @@ Other plugins are placed in lua/plugins
 The config has some custom commands, all placed in lua/commands
 - ```:CreateCProject <dir>``` - Creates a file providing C/GNU syntax
 - ```:Keymaps``` - Opens the file where all keymaps are defined
-- ```:NeoCodeium toggle``` - Toggles the AI code completion
+- ```:Copilot toggle``` - Toggles the AI code completion
+- ```:CopilotChatToggle``` - Toggles the AI chat integration
 
 ## Installation
 Make sure nvim is installed. Then
@@ -57,4 +59,4 @@ How to change the theme?
 - You can edit the theme in lua/core/visual.lua. Just replace the existing one. Then, change the other hexcodes in visual.lua
 
 How to use AI code completion?
-- ```:Neocodeium auth``` then fill with the token provided by Codeium.
+- ```:Copilot auth``` then follow the instructions to authenticate with GitHub.
