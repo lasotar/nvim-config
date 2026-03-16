@@ -19,14 +19,12 @@ cmp.setup({
     { name = "buffer" }, -- Buffer source
     { name = "path" }, -- Path source
     { name = "luasnip" }, -- Snippet source
-    { name = "copilot_chat" }, -- Autocomplete for @file, @buffer, etc. in Chat
   }),
   formatting = {
     format = function(entry, vim_item)
       -- Add icons for different sources
       vim_item.menu = ({
         copilot = "[Copilot]",
-        copilot_chat = "[Chat]",
         nvim_lsp = "[LSP]",
         buffer = "[Buffer]",
         path = "[Path]",
@@ -36,15 +34,6 @@ cmp.setup({
     end,
   },
   preselect = cmp.PreselectMode.Item, -- Auto-select the first item
-})
-
--- Fix for CopilotChat completion
-cmp.setup.filetype("copilot-chat", {
-  sources = cmp.config.sources({
-    { name = "copilot_chat" },
-    { name = "buffer" },
-    { name = "path" },
-  }),
 })
 
 -- Enable command-line completion

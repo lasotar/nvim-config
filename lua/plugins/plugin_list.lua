@@ -86,34 +86,6 @@ return
         })
       end,
     },
-    {
-      "CopilotC-Nvim/CopilotChat.nvim",
-      branch = "main",
-      dependencies = {
-        { "zbirenbaum/copilot.lua" },
-        { "nvim-lua/plenary.nvim" },
-        { "nvim-telescope/telescope.nvim" }, -- Ensure telescope is a dependency
-      },
-      build = "make install", 
-      opts = {
-        debug = false,
-        show_help = true, -- Shows a help block at the top of the chat
-        window = {
-          layout = 'vertical',
-          width = 0.3, -- 30% of the screen width
-        },
-        question_header = "## User ",
-        answer_header = "## Copilot ",
-        error_header = "## Error ",
-        separator = "───",
-        -- Use telescope for context and help actions
-        mappings = {
-          complete = {
-            insert = "<Tab>",
-          },
-        },
-      },
-    },
     -- Find and Replace
     {
         "nvim-pack/nvim-spectre"

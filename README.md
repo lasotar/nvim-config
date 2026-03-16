@@ -25,7 +25,7 @@ Other plugins are placed in lua/plugins
 - Telescope (https://github.com/nvim-telescope/telescope.nvim)
 - Mini.nvim (https://github.com/echasnovski/mini.nvim)
 - GitHub Copilot (https://github.com/zbirenbaum/copilot.lua)
-- Copilot Chat (https://github.com/CopilotC-Nvim/CopilotChat.nvim)
+- GitHub CLI Copilot (via `:terminal`)
 - HardTime (https://github.com/m4xshen/hardtime.nvim)
 - Precognition (https://github.com/tris203/precognition.nvim) (disabled by default, change in plugin_list.lua)
 - Gitsigns.nvim (https://github.com/lewis6991/gitsigns.nvim)
@@ -35,7 +35,7 @@ The config has some custom commands, all placed in lua/commands
 - ```:CreateCProject <dir>``` - Creates a file providing C/GNU syntax
 - ```:Keymaps``` - Opens the file where all keymaps are defined
 - ```:Copilot toggle``` - Toggles the AI code completion
-- ```:CopilotChatToggle``` - Toggles the AI chat integration
+- ```:CopilotChat``` - Opens the AI chat in a terminal (requires `gh copilot` extension)
 
 ## Installation
 Make sure nvim is installed. Then
@@ -60,3 +60,4 @@ How to change the theme?
 
 How to use AI code completion?
 - ```:Copilot auth``` then follow the instructions to authenticate with GitHub.
+- To use the terminal chat, ensure you have the GitHub CLI and the copilot extension installed (`gh extension install github/gh-copilot`).
