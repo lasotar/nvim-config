@@ -67,7 +67,12 @@ local function set_keymaps()
   -- Copilot Panel/Toggle
   vim.keymap.set("n", "<leader>tc", ":Copilot toggle<CR>", { desc = "Toggle Copilot AI" })
   vim.keymap.set("n", "<leader>cc", ":CopilotChat<CR>", { desc = "Toggle Copilot Chat (Terminal)", silent = true })
-  vim.keymap.set("t", "<leader>cc", [[<C-\><C-n>:CopilotChat<CR>]], { desc = "Toggle Copilot Chat (Terminal)", silent = true })
+
+  -- Terminal mode mappings
+  vim.keymap.set("t", "<C-[>", [[<C-\><C-n>]], { desc = "Enter Normal Mode in Terminal" })
+  vim.keymap.set("t", "<Esc>", [[<C-\><C-n>]], { desc = "Enter Normal Mode in Terminal" })
+  -- Removed t-mode <leader>cc to prevent space key interference. 
+  -- Users can now use <C-[> or <Esc> then <leader>cc to toggle the chat off.
 
 
   -- Find and Replace with Spectre

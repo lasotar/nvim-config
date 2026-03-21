@@ -16,18 +16,33 @@ M.toggle_chat = function()
       vim.api.nvim_set_current_buf(chat_bufnr)
     end
   else
-    -- Create new buffer and start process
-    vim.cmd("botright vnew")
+    -- Calculate a more functional width (minimum 80 columns if possible)
+    local width = math.floor(vim.o.columns * 0.4)
+    if width < 80 then width = math.max(width, math.min(80, vim.o.columns - 20)) end
+
+    -- Create new buffer and start process with fixed width immediately
+    vim.cmd("botright " .. width .. "vsplit")
+    vim.cmd("enew")
     chat_bufnr = vim.api.nvim_get_current_buf()
     
     -- Set buffer options
     vim.opt_local.number = false
     vim.opt_local.relativenumber = false
     vim.opt_local.signcolumn = "no"
-    vim.opt_local.buflisted = false -- Keep it out of :bnext/:bprev
+    vim.opt_local.buflisted = false
+    vim.opt_local.scrolloff = 0
+    vim.opt_local.sidescrolloff = 0
+    vim.opt_local.wrap = false -- Critical for TUI redraws to prevent "driving downwards"
     
     -- Start gh copilot chat
-    vim.fn.termopen("gh copilot")
+    vim.fn.termopen("gh copilot chat -- --no-alt-screen", {
+      env = {
+        TERM = "xterm-256color",
+        COLORTERM = "truecolor",
+        COLUMNS = tostring(width),
+        LINES = tostring(vim.api.nvim_win_get_height(0)),
+      }
+    })
     
     -- When the process finishes, reset chat_bufnr so we can start a new one if needed
     vim.api.nvim_create_autocmd("TermClose", {
@@ -40,10 +55,6 @@ M.toggle_chat = function()
     })
   end
 
-  -- Set the width to 30% of total columns
-  local width = math.floor(vim.o.columns * 0.3)
-  vim.api.nvim_win_set_width(0, width)
-  
   -- Enter insert mode automatically
   vim.cmd("startinsert")
 end
