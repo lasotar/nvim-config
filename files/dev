@@ -1,0 +1,58 @@
+#!/bin/bash
+# Quick launch script for IDE-like tmux layout with nvim + AI assistant + terminal
+
+SESSION_NAME="dev"
+AI_COMMAND="gh copilot"
+TARGET_DIR=""
+
+# Parse arguments
+while [[ $# -gt 0 ]]; do
+  case $1 in
+    --gemini)
+      AI_COMMAND="gemini"
+      shift
+      ;;
+    --claude)
+      AI_COMMAND="claude"
+      shift
+      ;;
+    *)
+      TARGET_DIR="$1"
+      shift
+      ;;
+  esac
+done
+
+# Validate and change directory if specified
+if [[ -n "$TARGET_DIR" ]]; then
+  if [[ ! -d "$TARGET_DIR" ]]; then
+    echo "Error: Directory '$TARGET_DIR' does not exist"
+    exit 1
+  fi
+  cd "$TARGET_DIR" || exit 1
+fi
+
+# Check if session already exists
+if tmux has-session -t $SESSION_NAME 2>/dev/null; then
+  # Session exists, attach to it
+  tmux attach-session -t $SESSION_NAME
+else
+  # Create new session with nvim in current directory
+  tmux new-session -d -s $SESSION_NAME -n "editor" -c "$(pwd)"
+  
+  # Split window vertically (25% for AI assistant on right)
+  tmux split-window -h -p 25 -t $SESSION_NAME -c "$(pwd)"
+  
+  # Send AI command to right pane
+  tmux send-keys -t $SESSION_NAME:1.2 "$AI_COMMAND" C-m
+  
+  # Select left pane and start nvim
+  tmux select-pane -t $SESSION_NAME:1.1
+  tmux send-keys -t $SESSION_NAME:1.1 'nvim' C-m
+  
+  # Zoom nvim pane to hide AI assistant by default
+  tmux resize-pane -Z -t $SESSION_NAME:1.1
+  
+  # Attach to the session
+  tmux attach-session -t $SESSION_NAME
+fi

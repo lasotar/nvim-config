@@ -40,3 +40,4 @@ if vim.fn.executable(venv_path) == 1 then
 end
 
 vim.opt.mouse = ""             -- Disable mouse support
+

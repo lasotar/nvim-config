@@ -216,8 +216,9 @@ return
       "goerz/jupytext.vim",
       lazy = false,
       init = function()
-        vim.g.jupytext_fmt = 'py:percent'
-        vim.g.jupytext_enable_py = 1
+        -- Enable automatic pairing with .ipynb files
+        vim.g.jupytext_enable = 1
+        vim.g.jupytext_fmt = 'py:percent'  -- Use percent format for Python scripts
       end,
     },
     -- Render markdown in Neovim (for Jupytext/Notebooks)

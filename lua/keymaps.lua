@@ -66,13 +66,11 @@ local function set_keymaps()
 
   -- Copilot Panel/Toggle
   vim.keymap.set("n", "<leader>tc", ":Copilot toggle<CR>", { desc = "Toggle Copilot AI" })
-  vim.keymap.set("n", "<leader>cc", ":CopilotChat<CR>", { desc = "Toggle Copilot Chat (Terminal)", silent = true })
 
   -- Terminal mode mappings
   vim.keymap.set("t", "<C-[>", [[<C-\><C-n>]], { desc = "Enter Normal Mode in Terminal" })
   vim.keymap.set("t", "<Esc>", [[<C-\><C-n>]], { desc = "Enter Normal Mode in Terminal" })
-  -- Removed t-mode <leader>cc to prevent space key interference. 
-  -- Users can now use <C-[> or <Esc> then <leader>cc to toggle the chat off.
+
 
 
   -- Find and Replace with Spectre
@@ -171,6 +169,13 @@ local function set_keymaps()
     require("jupytext-render").toggle()
     require("render-markdown").toggle()
   end, { desc = "Toggle Notebook Rendering", silent = true })
+
+  -- Refresh from .ipynb file (useful when external tools modify the notebook)
+  vim.keymap.set("n", "<leader>jr", function()
+    -- Force reload from the paired .ipynb file
+    vim.cmd("edit!")
+    vim.notify("Reloaded from .ipynb", vim.log.levels.INFO)
+  end, { desc = "Jupytext: Refresh from .ipynb", silent = true })
 end
 
   -- LaTeX
