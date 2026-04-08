@@ -37,7 +37,7 @@ require("lazy").setup({
       "hrsh7th/cmp-buffer", -- Buffer source
       "hrsh7th/cmp-path", -- Path source
       "hrsh7th/cmp-cmdline", -- Command line source
-      "L3MON4D3/LuaSnip", -- Snippet engine
+      { "L3MON4D3/LuaSnip", build = "make install_jsregexp", submodules = true }, -- Snippet engine with jsregexp library support
       "saadparwaiz1/cmp_luasnip", -- Snippet source
     },
     config = function()
